@@ -263,6 +263,53 @@
             display: block;
         }
 
+        .info-sections {
+            padding: 60px 5vw;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .split-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .feature-box, .interactive-card {
+            padding: 30px;
+            border-radius: 4px;
+            background: white;
+            border: 1px solid var(--brand-tertiary);
+            transition: all 0.3s ease;
+        }
+
+        .feature-box h3 { color: var(--brand-primary); margin-top: 0; }
+
+        .interactive-card {
+            text-decoration: none;
+            color: var(--text-dark);
+            display: block;
+        }
+
+        .interactive-card:hover {
+            border-color: var(--brand-accent);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .btn-inline {
+            display: inline-block;
+            color: var(--brand-primary);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            border-bottom: 2px solid var(--brand-accent);
+        }
+
+        @media (max-width: 768px) {
+            .split-row { grid-template-columns: 1fr; }
+        }
+
         #backToTop {
             display: none;
             position: fixed;
@@ -447,6 +494,32 @@
                     <h4>Compliance, Risk & Cybersecurity</h4>
                     <p>AML/CFT, data protection and cyber-resilience frameworks — secure and audit-ready.</p>
                     <span class="read-more">Read more →</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="info-sections">
+            <div class="split-row">
+                <div class="feature-box">
+                    <h3>End-to-End Solutions</h3>
+                    <p>From idea validation to operations management, we act as your single accountable partner for design, build, and launch.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Built for Innovators</h3>
+                    <p>We provide early-stage teams with the senior expertise required for licensing, regulatory strategy, and operational readiness.</p>
+                </div>
+            </div>
+
+            <div class="split-row">
+                <a href="cedratek_platform.html" class="interactive-card">
+                    <h4>CedraTek Platform</h4>
+                    <p>A modular, three-layer trust architecture for digital finance.</p>
+                    <span class="btn-inline">Discover Platform</span>
+                </a>
+                <a href="academy.html" class="interactive-card">
+                    <h4>Cedratech Academy</h4>
+                    <p>Capacity building, executive workshops, and technical training.</p>
+                    <span class="btn-inline">Explore Academy</span>
                 </a>
             </div>
         </section>
