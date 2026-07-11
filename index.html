@@ -344,6 +344,60 @@
         footer a:hover { opacity: 1; }
         .footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--divider-line); font-size: 0.85em; opacity: 0.7; }
 
+        .contact-section {
+            background-color: var(--bg-footer);
+            color: var(--text-light);
+            padding: 80px 5vw;
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .eyebrow {
+            color: var(--brand-accent);
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-section p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .contact-cta {
+            display: inline-block;
+            padding: 18px 40px;
+            background-color: var(--brand-accent);
+            color: var(--bg-footer);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .contact-cta:hover {
+            transform: scale(1.05);
+            background-color: white;
+        }
+
+        @media (max-width: 500px) {
+            .contact-section h2 { font-size: 1.8rem; }
+            .contact-cta { width: 100%; box-sizing: border-box; }
+        }
+
         @media (max-width: 1100px) {
             body { padding-top: 80px; }
             .topcontainer { height: 80px; padding: 0 20px; }
@@ -526,6 +580,15 @@
         
         <button onclick="scrollToTop()" id="backToTop" title="Go to top">↑</button>
     </main>
+
+    <section class="contact-section">
+        <div class="contact-content">
+            <span class="eyebrow">CONTACT</span>
+            <h2>Let's build something resilient together.</h2>
+            <p>We welcome conversations with institutions, regulators, fintechs, and programs ready to advance their digital-finance agenda. Reach out and we will respond promptly.</p>
+            <a href="mailto:info@cedratech.com" class="contact-cta">Email Us — info@cedratech.com</a>
+        </div>
+    </section>
 
     <footer>
         <div class="footer-grid">
