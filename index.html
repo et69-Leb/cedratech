@@ -334,7 +334,27 @@
         }
 
         #backToTop:hover { background-color: var(--brand-accent); }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
 
+        .footer-grid > div {
+            text-align: center;
+        }
+
+        .footer-grid ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-grid li {
+            margin-bottom: 8px;
+        }
         footer { background-color: var(--bg-footer); color: var(--text-light); padding: 50px 30px; margin-top: auto; }
         .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; align-self: center; justify-items: center;}
         footer h4 { margin-bottom: 15px; color: var(--brand-accent); }
