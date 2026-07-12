@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cedratech | Template</title>
+    <style>
+        :root {
+            --brand-primary: #1A365D;
+            --brand-secondary: #334155;
+            --brand-tertiary: #E2E8F0;
+            --brand-accent: #C5A059;
+            --bg-body: #FFFFFF;
+            --bg-surface: #F8FAFC;
+            --bg-header: var(--brand-primary);
+            --bg-footer: #0F172A;
+            --bg-dropdown: #243B53;
+            --text-light: #F8FAFC;
+            --text-dark: #1E293B;
+            --text-accent: var(--brand-accent);
+            --nav-active-bg: rgba(255, 255, 255, 0.1); 
+            --nav-hover-border: var(--brand-accent);
+            --dropdown-hover-border: var(--brand-accent);
+            --divider-line: rgba(255, 255, 255, 0.15); 
+            --scrollbar-thumb: #94A3B8;
+            --scrollbar-thumb-hover: #475569;
+            --mobile-menu-bg: var(--brand-primary);
+            --mobile-menu-hover-bg: rgba(255, 255, 255, 0.1);
+            --mobile-dropdown-bg: rgba(0, 0, 0, 0.15);
+        }
+
+        body { 
+            margin: 0; 
+            padding: 0; 
+            font-family: Georgia, 'Times New Roman', Times, serif; 
+            padding-top: 20vh; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-y: overlay;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+        }
+
+        ::-webkit-scrollbar { width: 8px; position: fixed; z-index: 9999; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); background-clip: padding-box; }
+
+        .topcontainer {
+            background-color: var(--bg-header);
+            width: 100%;
+            height: 15vh;
+            position: fixed;
+            top: 0;
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            box-sizing: border-box;
+            z-index: 2000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .toplogo { height: 10vh; width: auto; transition: all 0.3s ease; }
+
+        .cedratechtxt {
+            color: var(--text-light);
+            font-size: 3vh;
+            font-weight: bold;
+            margin-left: 15px;
+            white-space: nowrap;
+            flex-shrink: 0; 
+        }
+
+        nav { margin-left: auto; }
+        nav ul { display: flex; list-style: none; gap: 20px; margin: 0; padding: 0; align-items: center; }
+
+        .nav-item {
+            position: relative;
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .nav-item.hover-outline:hover { border-color: var(--nav-hover-border); }
+
+        .active-box {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--nav-active-bg);
+            border-radius: 6px;
+            z-index: 1;
+        }
+
+        .nav-item.active .active-box { display: block; }
+        .nav-item.active a { color: var(--text-light); }
+
+        nav a { 
+            text-decoration: none; 
+            color: var(--text-light); 
+            font-weight: bold; 
+            font-size: 2vh;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+        }
+
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--bg-dropdown);
+            padding: 5px 0;
+            min-width: 320px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            list-style: none;
+            z-index: 1001;
+            border-radius: 0 0 6px 6px;
+            border-top: 2px solid var(--brand-accent);
+        }
+
+        .dropdown:hover .dropdown-menu { display: block; }
+
+        .dropdown-item {
+            padding: 8px 20px;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+            margin: 2px 10px;
+            border-radius: 4px;
+        }
+
+        .dropdown-item:hover { border-color: var(--dropdown-hover-border); }
+        .dropdown-menu li a { display: block; font-size: 1.8vh; white-space: nowrap; color: var(--text-light); }
+
+        .menu-toggle {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            margin-left: auto;
+            color: var(--text-light);
+            transition: transform 0.2s ease;
+            user-select: none;
+        }
+
+        .menu-toggle:active { transform: scale(0.95); }
+
+        main h1 { text-align: center; color: var(--text-accent); }
+
+        .textbar-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 5vh;
+            margin-left: 5vw;
+            margin-right: 5vw;
+            margin-bottom: 8vh;
+        }
+
+        .textbar {
+            text-align: center;
+            background-color: var(--bg-surface);
+            color: var(--text-dark);
+            border-radius: 4px;
+            border-top: 4px solid var(--brand-primary);
+            padding: 40px 30px; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .textbar h4 { margin-top: 0; color: var(--brand-primary); font-size: 22px; }
+
+        .cta-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 100px;
+        }
+
+        .cta-button {
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--brand-primary);
+        }
+
+        .cta-button.primary { background-color: var(--brand-primary); color: white; }
+        .cta-button.primary:hover { background-color: transparent; color: var(--brand-primary); }
+        .cta-button.secondary { background-color: transparent; color: var(--brand-primary); }
+        .cta-button.secondary:hover { background-color: var(--brand-primary); color: white; }
+
+        .practice-areas {
+            padding: 80px 5vw;
+            background-color: var(--bg-surface);
+        }
+
+        .practice-areas h2 {
+            text-align: center;
+            color: var(--brand-primary);
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .practice-card {
+            background: white;
+            padding: 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: var(--text-dark);
+            border: 1px solid #E2E8F0;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .practice-card:hover {
+            border-color: var(--brand-accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .practice-card h4 {
+            margin-top: 0;
+            color: var(--brand-primary);
+            font-size: 1.25rem;
+        }
+
+        .practice-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .read-more {
+            color: var(--brand-accent);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            display: block;
+        }
+
+        .info-sections {
+            padding: 60px 5vw;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .split-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .feature-box, .interactive-card {
+            padding: 30px;
+            border-radius: 4px;
+            background: white;
+            border: 1px solid var(--brand-tertiary);
+            transition: all 0.3s ease;
+        }
+
+        .feature-box h3 { color: var(--brand-primary); margin-top: 0; }
+
+        .interactive-card {
+            text-decoration: none;
+            color: var(--text-dark);
+            display: block;
+        }
+
+        .interactive-card:hover {
+            border-color: var(--brand-accent);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .btn-inline {
+            display: inline-block;
+            color: var(--brand-primary);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            border-bottom: 2px solid var(--brand-accent);
+        }
+
+        @media (max-width: 768px) {
+            .split-row { grid-template-columns: 1fr; }
+        }
+
+        #backToTop {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: var(--brand-primary);
+            color: white;
+            cursor: pointer;
+            width: 50px;      /* Set specific width */
+            height: 50px;     /* Set height equal to width */
+            padding: 0;       /* Reset padding */
+            border-radius: 50%; /* This creates the perfect circle */
+            font-size: 20px;
+            transition: opacity 0.4s, background-color 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            display: flex;    /* Centers the arrow icon */
+            align-items: center;
+            justify-content: center;
+        }
+
+        #backToTop:hover { background-color: var(--brand-accent); }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        .footer-grid > div {
+            text-align: center;
+        }
+
+        .footer-grid ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-grid li {
+            margin-bottom: 8px;
+        }
+        footer { background-color: var(--bg-footer); color: var(--text-light); padding: 50px 30px; margin-top: auto; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; align-self: center; justify-items: center;}
+        footer h4 { margin-bottom: 15px; color: var(--brand-accent); }
+        footer ul { list-style: none; padding: 0; }
+        footer li { margin-bottom: 8px; }
+        footer a { color: var(--text-light); text-decoration: none; opacity: 0.85; transition: opacity 0.2s ease; }
+        footer a:hover { opacity: 1; }
+        .footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--divider-line); font-size: 0.85em; opacity: 0.7; }
+
+        .contact-section {
+            background-color: var(--bg-footer);
+            color: var(--text-light);
+            padding: 80px 5vw;
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .eyebrow {
+            color: var(--brand-accent);
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-section p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .contact-cta {
+            display: inline-block;
+            padding: 18px 40px;
+            background-color: var(--brand-accent);
+            color: var(--bg-footer);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .contact-cta:hover {
+            transform: scale(1.05);
+            background-color: white;
+        }
+
+        @media (max-width: 500px) {
+            .contact-section h2 { font-size: 1.8rem; }
+            .contact-cta { width: 100%; box-sizing: border-box; }
+        }
+
+        @media (max-width: 1100px) {
+            body { padding-top: 80px; }
+            .topcontainer { height: 80px; padding: 0 20px; }
+            .toplogo { height: 50px; }
+            .cedratechtxt { font-size: 2.2vh; }
+            .menu-toggle { display: block; }
+            nav {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--mobile-menu-bg);
+                border-top: 1px solid var(--divider-line);
+                max-height: calc(100vh - 80px);
+                overflow-y: auto;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            }
+            nav.active { display: block; }
+            nav ul { flex-direction: column; align-items: stretch; padding: 20px 0; gap: 5px; }
+            .nav-item { border-radius: 0; padding: 15px 30px; justify-content: center; }
+            .active-box { display: none !important; }
+            .nav-item.hover-outline:hover { border-color: transparent; background-color: var(--mobile-menu-hover-bg); }
+            .nav-item.active a { color: var(--text-light); }
+            .dropdown { flex-direction: column; }
+            .dropdown-menu { position: static; box-shadow: none; background-color: var(--mobile-dropdown-bg); width: 100%; padding: 10px 0; margin-top: 10px; border-radius: 0; border-top: none; }
+            .dropdown:hover .dropdown-menu { display: none; }
+            .dropdown.open .dropdown-menu { display: block; }
+            .dropdown-item { text-align: center; padding: 12px 20px; }
+            .dropdown-menu li a { font-size: 1.8vh; white-space: normal; }
+        }
+
+        @media (max-width: 500px) { .cedratechtxt { display: none; } }
+
+        @media (max-width: 500px) {
+        .cta-container {
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .cta-button {
+            width: 80%;
+            text-align: center;
+            padding: 18px 20px; /* Larger touch area for mobile */
+        }
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="topcontainer">
+            <img class="toplogo" src="logo.png" alt="Cedratech logo">
+            <div class="cedratechtxt">Cedratech Consulting Services Ltd.</div>
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+            <nav id="nav-menu">
+                <ul>
+                    <li class="nav-item hover-outline">
+                        <div class="active-box"></div>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item hover-outline dropdown" id="services-dropdown">
+                        <div class="active-box"></div>
+                        <a href="what_we_do.html" onclick="toggleDropdown(event)">What We Do ▼</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item"><a href="digital_payments_aquiring.html">Digital Payments & Acquiring</a></li>
+                            <li class="dropdown-item"><a href="terminal_merchant_management.html">Terminal & Merchant Management</a></li>
+                            <li class="dropdown-item"><a href="digital_public_infrastructure.html">Digital Public Infrastructure</a></li>
+                            <li class="dropdown-item"><a href="agency_banking_financial_inclusion.html">Agency Banking & Financial Inclusion</a></li>
+                            <li class="dropdown-item"><a href="open_banking_interoperability.html">Open Banking & Interoperability</a></li>
+                            <li class="dropdown-item"><a href="digital_payments_aquiring.html">Digital Transformation & Modernization</a></li>
+                            <li class="dropdown-item"><a href="regtech_suptech.html">RegTech & SupTech</a></li>
+                            <li class="dropdown-item"><a href="digital_lending_bnpl_msme_finance.html">Digital Lending, BNPL & MSME Finance</a></li>
+                            <li class="dropdown-item"><a href="compliance_risk_cybersecurity.html">Compliance, Risk & Cybersecurity</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item hover-outline"><div class="active-box"></div><a href="cedratek_platform.html">CedraTek Platform</a></li>
+                    <li class="nav-item hover-outline active"><div class="active-box"></div><a href="academy.html">Academy</a></li>
+                    <li class="nav-item hover-outline"><div class="active-box"></div><a href="insights.html">Insights</a></li>
+                    <li class="nav-item hover-outline"><div class="active-box"></div><a href="about.html">About</a></li>
+                    <li class="nav-item hover-outline"><div class="active-box"></div><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main style="max-width: 1100px; margin: 40px auto; padding: 0 20px;">
+        <!-- Hero Header -->
+        <div style="background: var(--brand-primary); color: white; padding: 60px 20px; text-align: center; margin-bottom: 40px;">
+            <h1>Education, Training & Capacity Building</h1>
+        </div>
+
+        <!-- Search Bar -->
+        <div style="text-align: center; margin-bottom: 40px;">
+            <input type="text" id="searchInput" onkeyup="filterTracks()" placeholder="Search programs (e.g. 'Fintech', 'Risk')..." 
+                style="width: 100%; max-width: 500px; padding: 15px; border: 2px solid var(--brand-tertiary); border-radius: 6px; font-size: 16px;">
+        </div>
+
+        <!-- Tracks Grid -->
+        <div id="tracks-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            
+            <!-- Track 1 -->
+            <div class="track-card" style="padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <h3>Open Banking & Interoperability</h3>
+                <ul>
+                    <li>Open Banking Regulations & Implementation</li>
+                    <li>Foundation & API Architecture</li>
+                    <li>Digital Identity & Data Governance</li>
+                </ul>
+            </div>
+
+            <!-- Track 2 -->
+            <div class="track-card" style="padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <h3>Payment Systems & Terminal Management</h3>
+                <ul>
+                    <li>IT Aspects of Payments Digitalization</li>
+                    <li>Legal, Economic & Business Aspects</li>
+                </ul>
+            </div>
+
+            <!-- Track 3 -->
+            <div class="track-card" style="padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <h3>Digital Public Infrastructure</h3>
+                <ul>
+                    <li>Digital Finance & Banking</li>
+                    <li>Machine Learning & Data for ML</li>
+                    <li>Blockchain, DeFi & Cloud Infrastructure</li>
+                </ul>
+            </div>
+
+            <!-- Track 4 -->
+            <div class="track-card" style="padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <h3>RegTech & SupTech for Supervisors</h3>
+                <ul>
+                    <li>IT Governance & Compliance</li>
+                    <li>Sandbox Simulation & Policy Testing</li>
+                </ul>
+            </div>
+
+            <!-- Track 5 -->
+            <div class="track-card" style="padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <h3>Digital Lending, BNPL & MSME Finance</h3>
+                <ul>
+                    <li>Digital Lending Approaches</li>
+                    <li>Financial Crime & Risk Management</li>
+                    <li>Digital Payments & Fraud Prevention</li>
+                </ul>
+            </div>
+
+            <!-- Track 6 -->
+            <div class="track-card" style="padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <h3>Financial Inclusion & Agency Banking</h3>
+                <ul>
+                    <li>Digital Financial Inclusion Strategies</li>
+                    <li>Islamic Fintech & Women in Fintech</li>
+                    <li>Youth Fintech Programs</li>
+                </ul>
+            </div>
+
+            <!-- Track 7 -->
+            <div class="track-card" style="padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <h3>Soft Skills</h3>
+                <ul>
+                    <li>Digital Training & Design Thinking</li>
+                    <li>Fintech Project Management</li>
+                    <li>Leadership for Executives</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function filterTracks() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('track-card');
+            for (let i = 0; i < cards.length; i++) {
+                cards[i].style.display = cards[i].innerText.toLowerCase().includes(input) ? "" : "none";
+            }
+        }
+    </script>
+
+    <section class="contact-section">
+        <div class="contact-content">
+            <span class="eyebrow">CONTACT US</span>
+            <h2>Let's build something resilient together.</h2>
+            <p>We welcome conversations with institutions, regulators, fintechs, and programs ready to advance their digital-finance agenda. Reach out and we will respond promptly.</p>
+            <a href="mailto:info@cedratech.com" class="contact-cta">Email Us — info@cedratech.com</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h4>Menu</h4>
+                <ul>
+                    <li><a href="what_we_do.html">What We Do</a></li>
+                    <li><a href="cedratek_platform.html">CedraTek Platform</a></li>
+                    <li><a href="academy.html">Academy</a></li>
+                    <li><a href="insights.html">Insights</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy_policy.html">Privacy Policy</a></li>
+                    <li><a href="https://www.linkedin.com/company/cedratech-consulting-services-ltd/" target="_blank">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 Cedratech Consulting Services Ltd. — All Rights Reserved.
+        </div>
+    </footer>
+
+    <button onclick="scrollToTop()" id="backToTop" title="Go to top">↑</button>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
+
+        function toggleDropdown(event) {
+            if (window.innerWidth <= 1100) {
+                event.preventDefault();
+                const dropdown = document.getElementById('services-dropdown');
+                dropdown.classList.toggle('open');
+            }
+        }
+
+        document.addEventListener('click', function(event) {
+            const nav = document.getElementById('nav-menu');
+            const toggle = document.querySelector('.menu-toggle');
+            if (!nav.contains(event.target) && !toggle.contains(event.target)) {
+                nav.classList.remove('active');
+            }
+        });
+
+        const backToTopButton = document.getElementById("backToTop");
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopButton.style.display = "flex";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
