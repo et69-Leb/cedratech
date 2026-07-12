@@ -250,6 +250,12 @@
             .dropdown.open .dropdown-menu { display: block; }
         }
         @media (max-width: 500px) { .cedratechtxt { display: none; } }
+
+        .nav-item.hover-outline:hover { border-color: transparent; background-color: var(--mobile-menu-hover-bg); }
+        .nav-item.active a { color: var(--text-light); }
+        .dropdown { flex-direction: column; }
+        .dropdown-item { text-align: center; padding: 12px 20px; }
+        .dropdown-menu li a { font-size: 1.8vh; white-space: normal; }
     </style>
 </head>
 <body>
