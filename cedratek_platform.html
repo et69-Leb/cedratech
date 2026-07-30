@@ -470,41 +470,7 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="topcontainer">
-            <img class="toplogo" src="logo.png" alt="Cedratech logo">
-            <div class="cedratechtxt">Cedratech Consulting Services Ltd.</div>
-            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-            <nav id="nav-menu">
-                <ul>
-                    <li class="nav-item hover-outline">
-                        <div class="active-box"></div>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item hover-outline dropdown" id="services-dropdown">
-                        <div class="active-box"></div>
-                        <a href="what_we_do.html" onclick="toggleDropdown(event)">What We Do ▼</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-item"><a href="digital_payments_aquiring.html">Digital Payments & Acquiring</a></li>
-                            <li class="dropdown-item"><a href="terminal_merchant_management.html">Terminal & Merchant Management</a></li>
-                            <li class="dropdown-item"><a href="digital_public_infrastructure.html">Digital Public Infrastructure</a></li>
-                            <li class="dropdown-item"><a href="agency_banking_financial_inclusion.html">Agency Banking & Financial Inclusion</a></li>
-                            <li class="dropdown-item"><a href="open_banking_interoperability.html">Open Banking & Interoperability</a></li>
-                            <li class="dropdown-item"><a href="digital_payments_aquiring.html">Digital Transformation & Modernization</a></li>
-                            <li class="dropdown-item"><a href="regtech_suptech.html">RegTech & SupTech</a></li>
-                            <li class="dropdown-item"><a href="digital_lending_bnpl_msme_finance.html">Digital Lending, BNPL & MSME Finance</a></li>
-                            <li class="dropdown-item"><a href="compliance_risk_cybersecurity.html">Compliance, Risk & Cybersecurity</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item hover-outline active"><div class="active-box"></div><a href="cedratek_platform.html">CedraTek Platform</a></li>
-                    <li class="nav-item hover-outline"><div class="active-box"></div><a href="academy.html">Academy</a></li>
-                    <li class="nav-item hover-outline"><div class="active-box"></div><a href="insights.html">Insights</a></li>
-                    <li class="nav-item hover-outline"><div class="active-box"></div><a href="about.html">About</a></li>
-                    <li class="nav-item hover-outline"><div class="active-box"></div><a href="contact.html">Contact Us</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <div id="header-placeholder"></div>
 
     <main>
         <section style="background-color: var(--brand-primary); color: white; padding: 80px 5vw; text-align: center;">
@@ -580,34 +546,39 @@
         </section>
     </main>
 
-    <footer>
-        <div class="footer-grid">
-            <div>
-                <h4>Menu</h4>
-                <ul>
-                    <li><a href="what_we_do.html">What We Do</a></li>
-                    <li><a href="cedratek_platform.html">CedraTek Platform</a></li>
-                    <li><a href="academy.html">Academy</a></li>
-                    <li><a href="insights.html">Insights</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="privacy_policy.html">Privacy Policy</a></li>
-                    <li><a href="https://www.linkedin.com/company/cedratech-consulting-services-ltd/" target="_blank">LinkedIn</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            © 2026 Cedratech Consulting Services Ltd. — All Rights Reserved.
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
 
     <button onclick="scrollToTop()" id="backToTop" title="Go to top">↑</button>
 
     <script>
+        // 1. Load the header dynamically, then highlight the active page
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+
+                let path = window.location.pathname;
+                let page = path.split("/").pop();
+                if (page === "" || page === "/") {
+                    page = "index.html";
+                }
+
+                const navItems = document.querySelectorAll('#nav-menu .nav-item, #nav-menu .dropdown-item');
+                navItems.forEach(item => {
+                    if (item.getAttribute('data-page') === page) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+
+        // 2. Load the footer dynamically
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+
+        // Your existing toggle and helper functions
         function toggleMenu() {
             document.getElementById('nav-menu').classList.toggle('active');
         }
@@ -623,7 +594,7 @@
         document.addEventListener('click', function(event) {
             const nav = document.getElementById('nav-menu');
             const toggle = document.querySelector('.menu-toggle');
-            if (!nav.contains(event.target) && !toggle.contains(event.target)) {
+            if (nav && toggle && !nav.contains(event.target) && !toggle.contains(event.target)) {
                 nav.classList.remove('active');
             }
         });

@@ -577,32 +577,37 @@
         </div>
     </section>
 
-    <footer>
-        <div class="footer-grid">
-            <div>
-                <h4>Menu</h4>
-                <ul>
-                    <li><a href="what_we_do.html">What We Do</a></li>
-                    <li><a href="cedratek_platform.html">CedraTek Platform</a></li>
-                    <li><a href="academy.html">Academy</a></li>
-                    <li><a href="insights.html">Insights</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="privacy_policy.html">Privacy Policy</a></li>
-                    <li><a href="https://www.linkedin.com/company/cedratech-consulting-services-ltd/" target="_blank">LinkedIn</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            © 2026 Cedratech Consulting Services Ltd. — All Rights Reserved.
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
 
     <script>
+        // 1. Load the header dynamically, then highlight the active page
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+
+                let path = window.location.pathname;
+                let page = path.split("/").pop();
+                if (page === "" || page === "/") {
+                    page = "index.html";
+                }
+
+                const navItems = document.querySelectorAll('#nav-menu .nav-item, #nav-menu .dropdown-item');
+                navItems.forEach(item => {
+                    if (item.getAttribute('data-page') === page) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+
+        // 2. Load the footer dynamically
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+
+        // Your existing toggle and helper functions
         function toggleMenu() {
             document.getElementById('nav-menu').classList.toggle('active');
         }
@@ -618,7 +623,7 @@
         document.addEventListener('click', function(event) {
             const nav = document.getElementById('nav-menu');
             const toggle = document.querySelector('.menu-toggle');
-            if (!nav.contains(event.target) && !toggle.contains(event.target)) {
+            if (nav && toggle && !nav.contains(event.target) && !toggle.contains(event.target)) {
                 nav.classList.remove('active');
             }
         });
@@ -626,7 +631,7 @@
         const backToTopButton = document.getElementById("backToTop");
         window.onscroll = function() {
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                backToTopButton.style.display = "block";
+                backToTopButton.style.display = "flex";
             } else {
                 backToTopButton.style.display = "none";
             }
@@ -635,29 +640,6 @@
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        fetch('header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header-placeholder').innerHTML = data;
-
-            // Get the current filename (e.g., "about.html" or "index.html")
-            let path = window.location.pathname;
-            let page = path.split("/").pop();
-            
-            // Default to index.html if viewing root domain
-            if (page === "" || page === "/") {
-                page = "index.html";
-            }
-
-            // Find matching navigation items and set them to active
-            const navItems = document.querySelectorAll('#nav-menu .nav-item, #nav-menu .dropdown-item');
-            navItems.forEach(item => {
-                if (item.getAttribute('data-page') === page) {
-                    item.classList.add('active');
-                }
-            });
-        });
     </script>
 </body>
 </html>
