@@ -470,41 +470,7 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="topcontainer">
-            <img class="toplogo" src="logo.png" alt="Cedratech logo">
-            <div class="cedratechtxt">Cedratech Consulting Services Ltd.</div>
-            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-            <nav id="nav-menu">
-                <ul>
-                    <li class="nav-item hover-outline active">
-                        <div class="active-box"></div>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item hover-outline dropdown" id="services-dropdown">
-                        <div class="active-box"></div>
-                        <a href="what_we_do.html" onclick="toggleDropdown(event)">What We Do ▼</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-item"><a href="digital_payments_aquiring.html">Digital Payments & Acquiring</a></li>
-                            <li class="dropdown-item"><a href="terminal_merchant_management.html">Terminal & Merchant Management</a></li>
-                            <li class="dropdown-item"><a href="digital_public_infrastructure.html">Digital Public Infrastructure</a></li>
-                            <li class="dropdown-item"><a href="agency_banking_financial_inclusion.html">Agency Banking & Financial Inclusion</a></li>
-                            <li class="dropdown-item"><a href="open_banking_interoperability.html">Open Banking & Interoperability</a></li>
-                            <li class="dropdown-item"><a href="digital_payments_aquiring.html">Digital Transformation & Modernization</a></li>
-                            <li class="dropdown-item"><a href="regtech_suptech.html">RegTech & SupTech</a></li>
-                            <li class="dropdown-item"><a href="digital_lending_bnpl_msme_finance.html">Digital Lending, BNPL & MSME Finance</a></li>
-                            <li class="dropdown-item"><a href="compliance_risk_cybersecurity.html">Compliance, Risk & Cybersecurity</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item hover-outline"><div class="active-box"></div><a href="cedratek_platform.html">CedraTek Platform</a></li>
-                    <li class="nav-item hover-outline"><div class="active-box"></div><a href="academy.html">Academy</a></li>
-                    <li class="nav-item hover-outline"><div class="active-box"></div><a href="insights.html">Insights</a></li>
-                    <li class="nav-item hover-outline"><div class="active-box"></div><a href="about.html">About</a></li>
-                    <li class="nav-item hover-outline"><div class="active-box"></div><a href="contact.html">Contact Us</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <div id="header-placeholder"></div>
 
     <!-- INSERT PAGE CONTENT HERE -->
 
@@ -513,7 +479,7 @@
             <span class="eyebrow">CONTACT US</span>
             <h2>Let's build something resilient together.</h2>
             <p>We welcome conversations with institutions, regulators, fintechs, and programs ready to advance their digital-finance agenda. Reach out and we will respond promptly.</p>
-            <a href="mailto:info@cedratech.com" class="contact-cta">Email Us — info@cedratech.com</a>
+            <a href="contact.html" class="contact-cta">Contact Us</a>
         </div>
     </section>
 
@@ -577,6 +543,29 @@
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+                fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+
+            // Get the current filename (e.g., "about.html" or "index.html")
+            let path = window.location.pathname;
+            let page = path.split("/").pop();
+            
+            // Default to index.html if viewing root domain
+            if (page === "" || page === "/") {
+                page = "index.html";
+            }
+
+            // Find matching navigation items and set them to active
+            const navItems = document.querySelectorAll('#nav-menu .nav-item, #nav-menu .dropdown-item');
+            navItems.forEach(item => {
+                if (item.getAttribute('data-page') === page) {
+                    item.classList.add('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
