@@ -158,7 +158,7 @@
 
         main h1 { text-align: center; color: var(--text-accent); }
 
-        /* Portfolio Specific Styles */
+        /* Portfolio Header & Layout */
         .portfolio-header {
             background-color: var(--brand-primary);
             color: white;
@@ -209,28 +209,207 @@
             margin-bottom: 10px;
         }
 
-        .portfolio-table {
-            width: 100%;
-            border-collapse: collapse;
+        /* Interactive Tiers Grid Cards */
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+        .tier-card {
+            background: white;
+            border: 1px solid var(--brand-tertiary);
+            border-top: 4px solid var(--brand-accent);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .tier-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.08);
+        }
+        .tier-card h4 {
+            color: var(--brand-primary);
+            margin-top: 0;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        .tier-meta {
+            font-size: 0.95rem;
+            color: var(--brand-secondary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .tier-meta strong {
+            color: var(--brand-primary);
+            min-width: 90px;
+        }
+
+        /* Interactive Paths Grid Cards - Improved UX & Pleasant Contrast Styling */
+        .paths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
             margin-top: 20px;
             margin-bottom: 40px;
-            background: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        .portfolio-table th, .portfolio-table td {
-            border: 1px solid var(--brand-tertiary);
-            padding: 15px;
-            text-align: left;
-            font-size: 1rem;
+        .path-card {
+            background: #FFFFFF;
+            border: 1px solid #CBD5E1;
+            border-left: 5px solid var(--brand-accent);
+            border-radius: 8px;
+            padding: 22px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .path-card:hover {
+            border-color: var(--brand-primary);
+            border-left-color: var(--brand-primary);
+            background: var(--bg-surface);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(26, 54, 93, 0.08);
+        }
+        .path-number {
+            display: inline-block;
+            background: #F1F5F9;
+            color: var(--brand-primary);
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            border: 1px solid #E2E8F0;
+        }
+        .path-card:hover .path-number {
+            background: var(--brand-primary);
+            color: var(--brand-accent);
+            border-color: var(--brand-primary);
+        }
+        .path-card h4 {
+            margin: 0 0 10px 0;
+            color: var(--brand-primary);
+            font-size: 1.2rem;
+        }
+        .path-card p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--brand-secondary);
             line-height: 1.5;
         }
-        .portfolio-table th {
-            background-color: var(--bg-surface);
-            color: var(--brand-primary);
-            font-weight: bold;
+
+        /* Interactive Catalog Filter & Accordion System */
+        .catalog-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
         }
-        .portfolio-table tr:nth-child(even) {
-            background-color: #fafbfc;
+        .filter-btn {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--brand-tertiary);
+            color: var(--brand-primary);
+            padding: 10px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--brand-primary);
+            color: white;
+            border-color: var(--brand-primary);
+        }
+
+        .catalog-accordion-item {
+            background: white;
+            border: 1px solid var(--brand-tertiary);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            /* Added scroll-margin-top so anchored/jumped accordions stay neatly below the fixed topbar */
+            scroll-margin-top: calc(15vh + 30px);
+        }
+        .catalog-accordion-header {
+            background: var(--bg-surface);
+            padding: 18px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: var(--brand-primary);
+            font-size: 1.2rem;
+            transition: background-color 0.2s ease;
+        }
+        .catalog-accordion-header:hover {
+            background-color: #f1f5f9;
+        }
+        .catalog-accordion-header::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--brand-accent);
+            transition: transform 0.2s ease;
+        }
+        .catalog-accordion-item.open .catalog-accordion-header::after {
+            transform: rotate(45deg);
+        }
+        .catalog-accordion-content {
+            display: none;
+            padding: 20px 25px;
+            border-top: 1px solid var(--brand-tertiary);
+        }
+        .catalog-accordion-item.open .catalog-accordion-content {
+            display: block;
+        }
+
+        /* Course Cards inside Accordion */
+        .course-card-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .course-item-card {
+            background: var(--bg-surface);
+            border-left: 4px solid var(--brand-primary);
+            padding: 15px 20px;
+            border-radius: 0 6px 6px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            transition: transform 0.15s ease;
+        }
+        .course-item-card:hover {
+            transform: translateX(4px);
+        }
+        .course-info h5 {
+            margin: 0 0 6px 0;
+            color: var(--brand-primary);
+            font-size: 1.05rem;
+        }
+        .course-info p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+        .tier-badge {
+            background: var(--brand-accent);
+            color: var(--bg-footer);
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         #backToTop {
@@ -300,6 +479,7 @@
             opacity: 0.9;
         }
 
+        /* Improved High-UX CTA Buttons (Fixed Hover Contrast Issue) */
         .contact-cta {
             display: inline-block;
             padding: 18px 40px;
@@ -307,13 +487,16 @@
             color: var(--bg-footer);
             text-decoration: none;
             font-weight: bold;
-            border-radius: 4px;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3);
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .contact-cta:hover {
-            transform: scale(1.05);
-            background-color: white;
+            transform: translateY(-2px);
+            background-color: #D4AF37; /* Warmer gold hue that maintains dark text contrast instead of harsh blinding white */
+            color: var(--bg-footer);
+            box-shadow: 0 6px 16px rgba(197, 160, 89, 0.4);
         }
 
         @media (max-width: 1100px) {
@@ -346,12 +529,18 @@
             .dropdown.open .dropdown-menu { display: block; }
             .dropdown-item { text-align: center; padding: 12px 20px; }
             .dropdown-menu li a { font-size: 1.8vh; white-space: normal; }
+            
+            /* Adjust scroll margin for smaller screens where header height changes */
+            .catalog-accordion-item {
+                scroll-margin-top: 100px;
+            }
         }
 
         @media (max-width: 500px) { 
             .cedratechtxt { display: none; } 
             .contact-section h2 { font-size: 1.8rem; }
-            .contact-cta { width: 100%; box-sizing: border-box; }
+            .contact-cta { width: 100%; box-sizing: border-box; text-align: center; }
+            .course-item-card { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
@@ -388,40 +577,29 @@
             <h3>How the Portfolio Works: Three Delivery Tiers</h3>
             <p>Every programme in this catalog carries a tier. The tier defines the audience, the format, the duration, and the recognition awarded. A topic may appear at more than one tier, delivered at different depth for different audiences.</p>
             
-            <table class="portfolio-table">
-                <thead>
-                    <tr>
-                        <th>Tier</th>
-                        <th>Audience</th>
-                        <th>Format</th>
-                        <th>Duration</th>
-                        <th>Recognition</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Tier 1 — Foundational</strong></td>
-                        <td>Open professional audiences; students; general staff</td>
-                        <td>Live webinar</td>
-                        <td>60 minutes (5 min introduction, 45 min core, 10 min Q&A)</td>
-                        <td>Attendance record</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Tier 2 — Intermediate</strong></td>
-                        <td>Practitioners; intermediaries; departmental teams</td>
-                        <td>Multi-session online course, preceded by a Knowledge or Staff Assessment Test to calibrate depth</td>
-                        <td>Typically 4 sessions of 3–4 hours; adjusted to topic, audience, and client</td>
-                        <td>Certificate of attendance</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Tier 3 — Advanced / Executive</strong></td>
-                        <td>Senior leadership; boards; regulators; supervisory authorities; institutional teams</td>
-                        <td>In-person or online capacity building, workshops, and knowledge transfer</td>
-                        <td>4–5 days at 8 hours per day; intensive applied work</td>
-                        <td>Certificate of completion</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="tiers-grid">
+                <div class="tier-card">
+                    <h4>Tier 1 — Foundational</h4>
+                    <div class="tier-meta"><strong>Audience:</strong> Open professional audiences; students; general staff</div>
+                    <div class="tier-meta"><strong>Format:</strong> Live webinar</div>
+                    <div class="tier-meta"><strong>Duration:</strong> 60 minutes (5 min intro, 45 min core, 10 min Q&A)</div>
+                    <div class="tier-meta"><strong>Recognition:</strong> Attendance record</div>
+                </div>
+                <div class="tier-card">
+                    <h4>Tier 2 — Intermediate</h4>
+                    <div class="tier-meta"><strong>Audience:</strong> Practitioners; intermediaries; departmental teams</div>
+                    <div class="tier-meta"><strong>Format:</strong> Multi-session online course with Assessment Test calibration</div>
+                    <div class="tier-meta"><strong>Duration:</strong> Typically 4 sessions of 3–4 hours</div>
+                    <div class="tier-meta"><strong>Recognition:</strong> Certificate of attendance</div>
+                </div>
+                <div class="tier-card">
+                    <h4>Tier 3 — Advanced / Executive</h4>
+                    <div class="tier-meta"><strong>Audience:</strong> Senior leadership; boards; regulators; supervisors</div>
+                    <div class="tier-meta"><strong>Format:</strong> In-person/online capacity building & workshops</div>
+                    <div class="tier-meta"><strong>Duration:</strong> 4–5 days at 8 hours per day; intensive applied work</div>
+                    <div class="tier-meta"><strong>Recognition:</strong> Certificate of completion</div>
+                </div>
+            </div>
 
             <p>Programmes combine into learning tracks. A typical institutional track opens with a Tier 1 webinar to establish shared vocabulary, moves through Tier 2 courses for the teams who will operate the capability, and closes with a Tier 3 executive workshop for the leadership accountable for it.</p>
             <p><strong>Delivery languages:</strong> English, with Arabic available on request. Materials are provided in English.</p>
@@ -429,349 +607,304 @@
 
         <section class="portfolio-section">
             <h3>The Ten Learning Paths</h3>
-            <table class="portfolio-table">
-                <thead>
-                    <tr>
-                        <th>Path</th>
-                        <th>Learning Path</th>
-                        <th>Scope</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>I</td>
-                        <td>Digital Economy, Banking and Transformation</td>
-                        <td>The foundations of digital finance and the institution-wide transformation it demands.</td>
-                    </tr>
-                    <tr>
-                        <td>II</td>
-                        <td>Payments and Digital Money</td>
-                        <td>Payment instruments, rails, wallets, cards, fraud, and the economics that govern them.</td>
-                    </tr>
-                    <tr>
-                        <td>III</td>
-                        <td>Payment Systems Operations and Market Infrastructure</td>
-                        <td>Interbank settlement, RTGS, clearing, liquidity, national payment systems, and digital public infrastructure.</td>
-                    </tr>
-                    <tr>
-                        <td>IV</td>
-                        <td>Open Banking, APIs and Interoperability</td>
-                        <td>Open banking and open finance, API architecture, consent, sandboxes, and platform models.</td>
-                    </tr>
-                    <tr>
-                        <td>V</td>
-                        <td>FinTech and Emerging Technology</td>
-                        <td>Blockchain, digital assets, tokenization, cloud, quantum, and the emerging technology frontier.</td>
-                    </tr>
-                    <tr>
-                        <td>VI</td>
-                        <td>Data, Artificial Intelligence and Analytics</td>
-                        <td>Data literacy, machine learning, agentic AI, model risk, and the governance that keeps AI trustworthy.</td>
-                    </tr>
-                    <tr>
-                        <td>VII</td>
-                        <td>Risk, Cybersecurity and Operational Resilience</td>
-                        <td>Cyber threats, ICT risk, DORA, third-party risk, business continuity, and privacy.</td>
-                    </tr>
-                    <tr>
-                        <td>VIII</td>
-                        <td>Compliance, RegTech and SupTech</td>
-                        <td>AML/CFT, financial crime, MiCA, consumer protection, regulatory automation, and supervisory technology.</td>
-                    </tr>
-                    <tr>
-                        <td>IX</td>
-                        <td>Financial Inclusion and Development Finance</td>
-                        <td>Inclusive digital products, digital lending, MSME finance, agency banking, green finance, and ESG.</td>
-                    </tr>
-                    <tr>
-                        <td>X</td>
-                        <td>Innovation, Entrepreneurship and Professional Skills</td>
-                        <td>Design thinking, startup building, agile delivery, leadership, and career readiness.</td>
-                    </tr>
-                </tbody>
-            </table>
+            <p>Explore our core curriculum categories below. Click any card to jump directly to that path in the catalog.</p>
+            
+            <div class="paths-grid">
+                <div class="path-card" onclick="openCatalogPath('path-1')">
+                    <span class="path-number">Path I</span>
+                    <h4>Digital Economy, Banking and Transformation</h4>
+                    <p>The foundations of digital finance and the institution-wide transformation it demands.</p>
+                </div>
+                <div class="path-card" onclick="openCatalogPath('path-2')">
+                    <span class="path-number">Path II</span>
+                    <h4>Payments and Digital Money</h4>
+                    <p>Payment instruments, rails, wallets, cards, fraud, and the economics that govern them.</p>
+                </div>
+                <div class="path-card" onclick="openCatalogPath('path-3')">
+                    <span class="path-number">Path III</span>
+                    <h4>Payment Systems Operations and Market Infrastructure</h4>
+                    <p>Interbank settlement, RTGS, clearing, liquidity, national payment systems, and DPI.</p>
+                </div>
+                <div class="path-card" onclick="openCatalogPath('path-4')">
+                    <span class="path-number">Path IV</span>
+                    <h4>Open Banking, APIs and Interoperability</h4>
+                    <p>Open banking and open finance, API architecture, consent, sandboxes, and platform models.</p>
+                </div>
+                <div class="path-card" onclick="openCatalogPath('path-5')">
+                    <span class="path-number">Path V</span>
+                    <h4>FinTech and Emerging Technology</h4>
+                    <p>Blockchain, digital assets, tokenization, cloud, quantum, and the emerging technology frontier.</p>
+                </div>
+                <div class="path-card" onclick="openCatalogPath('path-6')">
+                    <span class="path-number">Path VI</span>
+                    <h4>Data, Artificial Intelligence and Analytics</h4>
+                    <p>Data literacy, machine learning, agentic AI, model risk, and trustworthy AI governance.</p>
+                </div>
+                <div class="path-card" onclick="openCatalogPath('path-7')">
+                    <span class="path-number">Path VII</span>
+                    <h4>Risk, Cybersecurity and Operational Resilience</h4>
+                    <p>Cyber threats, ICT risk, DORA, third-party risk, business continuity, and privacy.</p>
+                </div>
+                <div class="path-card" onclick="openCatalogPath('path-8')">
+                    <span class="path-number">Path VIII</span>
+                    <h4>Compliance, RegTech and SupTech</h4>
+                    <p>AML/CFT, financial crime, MiCA, consumer protection, regulatory automation, and SupTech.</p>
+                </div>
+                <div class="path-card" onclick="openCatalogPath('path-9')">
+                    <span class="path-number">Path IX</span>
+                    <h4>Financial Inclusion and Development Finance</h4>
+                    <p>Inclusive digital products, digital lending, MSME finance, agency banking, and green finance.</p>
+                </div>
+                <div class="path-card" onclick="openCatalogPath('path-10')">
+                    <span class="path-number">Path X</span>
+                    <h4>Innovation, Entrepreneurship and Professional Skills</h4>
+                    <p>Design thinking, startup building, agile delivery, leadership, and career readiness.</p>
+                </div>
+            </div>
         </section>
 
-        <section class="portfolio-section">
+        <section class="portfolio-section" id="catalog-section">
             <h3>The Complete Catalog</h3>
-            <p><strong>Tier key:</strong> F — Foundational (Tier 1) · I — Intermediate (Tier 2) · A — Advanced / Executive (Tier 3)</p>
+            <p><strong>Tier key:</strong> <span class="tier-badge" style="background:var(--brand-primary); color:white;">F</span> Foundational (Tier 1) · <span class="tier-badge" style="background:var(--brand-primary); color:white;">I</span> Intermediate (Tier 2) · <span class="tier-badge" style="background:var(--brand-primary); color:white;">A</span> Advanced / Executive (Tier 3)</p>
 
-            <!-- Path I -->
-            <h4 style="color: var(--brand-primary); margin-top: 30px;">I. Digital Economy, Banking and Transformation</h4>
-            <table class="portfolio-table">
-                <thead>
-                    <tr>
-                        <th>Programme</th>
-                        <th>Tier</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Digital Economy Fundamentals</td><td>F</td><td>How digital technology reshapes markets, money, business models, and work across the global economy.</td></tr>
-                    <tr><td>Digital Finance</td><td>I</td><td>The architecture of digital financial services: channels, products, providers, and the value they create.</td></tr>
-                    <tr><td>Digital Banking</td><td>I</td><td>Digital banking models, from channel digitization through to fully digital institutions.</td></tr>
-                    <tr><td>Digital Banking Products and Channels</td><td>F</td><td>The product set and the channels through which customers reach a modern bank.</td></tr>
-                    <tr><td>Digital Commerce</td><td>F</td><td>E-commerce models, merchant channels, and the digital retail value chain.</td></tr>
-                    <tr><td>Digital Transformation</td><td>F</td><td>What digital transformation means in practice, and the shifts in people, process, and technology it requires.</td></tr>
-                    <tr><td>Digital Transformation in Finance</td><td>I</td><td>Transformation strategy and execution inside banks, microfinance institutions, and payment providers.</td></tr>
-                    <tr><td>Business Transformation and Operating Model Design</td><td>I</td><td>Redesigning enterprise processes, structures, and capabilities for digital delivery.</td></tr>
-                    <tr><td>Digital Transformation Strategy and Change Management</td><td>A</td><td>Executive-level design and leadership of institution-wide transformation programmes.</td></tr>
-                    <tr><td>Change Management and Digital Adoption</td><td>I</td><td>Securing genuine adoption of new systems by staff, agents, and customers.</td></tr>
-                    <tr><td>Digital Customer Experience and Journey Design</td><td>I</td><td>Mapping and designing end-to-end customer journeys across digital channels.</td></tr>
-                    <tr><td>Customer-Centric Digital Product Design</td><td>I</td><td>Applying user-centered design principles to digital financial products.</td></tr>
-                    <tr><td>Digital Finance for Financial Sector Development</td><td>A</td><td>Policy-level capacity building on digital finance as an engine of financial sector development.</td></tr>
-                    <tr><td>Leadership and Governance in Digital Financial Institutions</td><td>A</td><td>Board and executive governance of digitally transformed financial institutions.</td></tr>
-                </tbody>
-            </table>
+            <div class="catalog-controls">
+                <button class="filter-btn active" onclick="filterCatalog('all', this)">All Paths</button>
+                <button class="filter-btn" onclick="filterCatalog('F', this)">Foundational (Tier 1)</button>
+                <button class="filter-btn" onclick="filterCatalog('I', this)">Intermediate (Tier 2)</button>
+                <button class="filter-btn" onclick="filterCatalog('A', this)">Advanced / Executive (Tier 3)</button>
+            </div>
 
-            <!-- Path II -->
-            <h4 style="color: var(--brand-primary); margin-top: 30px;">II. Payments and Digital Money</h4>
-            <table class="portfolio-table">
-                <thead>
-                    <tr>
-                        <th>Programme</th>
-                        <th>Tier</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Digital Payments</td><td>F</td><td>Payment instruments, rails, participants, and flows across the digital payments ecosystem.</td></tr>
-                    <tr><td>Digital Financial Literacy</td><td>F</td><td>Practical command of digital money, accounts, payments, and safe usage.</td></tr>
-                    <tr><td>Mobile Money and Digital Wallets</td><td>F</td><td>Wallet models, stored value, agent networks, and mobile-money ecosystems.</td></tr>
-                    <tr><td>Cards, Acquiring and Merchant Payments</td><td>I</td><td>Issuing, acquiring, scheme rules, and the servicing of merchants at scale.</td></tr>
-                    <tr><td>Terminal and Merchant Management</td><td>I</td><td>POS estate management, terminal lifecycle, and merchant onboarding operations.</td></tr>
-                    <tr><td>Cross-Border Payments and Remittances</td><td>I</td><td>Correspondent banking, remittance corridors, and the economics of cross-border transfer.</td></tr>
-                    <tr><td>Digital Payment Ecosystems and Interoperability</td><td>I</td><td>Designing interoperable payment ecosystems across banks, PSPs, telcos, and schemes.</td></tr>
-                    <tr><td>Digital Payments and Fraud Prevention</td><td>I</td><td>Fraud typologies across payment channels and the controls that contain them.</td></tr>
-                    <tr><td>Agency Banking and Agent Network Management</td><td>I</td><td>Agent distribution, liquidity management, and rural reach.</td></tr>
-                    <tr><td>Payment Economics and Pricing</td><td>A</td><td>Interchange, MDR, scheme economics, and the unit economics of payment products.</td></tr>
-                </tbody>
-            </table>
+            <!-- Interactive Accordion Catalog -->
+            <div id="catalog-accordion-container">
+                
+                <!-- Path I -->
+                <div class="catalog-accordion-item" id="path-1" data-path="1">
+                    <div class="catalog-accordion-header" onclick="toggleAccordion(this)">I. Digital Economy, Banking and Transformation</div>
+                    <div class="catalog-accordion-content">
+                        <div class="course-card-list">
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Digital Economy Fundamentals</h5><p>How digital technology reshapes markets, money, business models, and work across the global economy.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Digital Finance</h5><p>The architecture of digital financial services: channels, products, providers, and the value they create.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Digital Banking</h5><p>Digital banking models, from channel digitization through to fully digital institutions.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Digital Banking Products and Channels</h5><p>The product set and the channels through which customers reach a modern bank.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Digital Commerce</h5><p>E-commerce models, merchant channels, and the digital retail value chain.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Digital Transformation</h5><p>What digital transformation means in practice, and the shifts in people, process, and technology it requires.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Digital Transformation in Finance</h5><p>Transformation strategy and execution inside banks, microfinance institutions, and payment providers.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Business Transformation and Operating Model Design</h5><p>Redesigning enterprise processes, structures, and capabilities for digital delivery.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Digital Transformation Strategy and Change Management</h5><p>Executive-level design and leadership of institution-wide transformation programmes.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Change Management and Digital Adoption</h5><p>Securing genuine adoption of new systems by staff, agents, and customers.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Digital Customer Experience and Journey Design</h5><p>Mapping and designing end-to-end customer journeys across digital channels.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Customer-Centric Digital Product Design</h5><p>Applying user-centered design principles to digital financial products.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Digital Finance for Financial Sector Development</h5><p>Policy-level capacity building on digital finance as an engine of financial sector development.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Leadership and Governance in Digital Financial Institutions</h5><p>Board and executive governance of digitally transformed financial institutions.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Path III -->
-            <h4 style="color: var(--brand-primary); margin-top: 30px;">III. Payment Systems Operations and Market Infrastructure</h4>
-            <table class="portfolio-table">
-                <thead>
-                    <tr>
-                        <th>Programme</th>
-                        <th>Tier</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Instant Payment Systems and Interoperability</td><td>I</td><td>Fast payment rails, scheme design, and the interoperability that makes them reach.</td></tr>
-                    <tr><td>Clearing, Settlement and Reconciliation Operations</td><td>I</td><td>How transactions clear, settle, reconcile, and how exceptions are identified and resolved.</td></tr>
-                    <tr><td>IT Aspects of Payments Digitalization</td><td>A</td><td>Architecture, security, and interoperability of national payment systems, for central bank IT and payments teams.</td></tr>
-                    <tr><td>Legal, Economic and Business Aspects of Payments Digitalization</td><td>A</td><td>Legal and business frameworks governing national payment systems, for regulatory and economic units.</td></tr>
-                    <tr><td>National Payment Systems Operations: RTGS and Interbank Funds Transfer</td><td>A</td><td>Real-time gross settlement, interbank transfer, liquidity positioning, and reconciliation, delivered against a live national system.</td></tr>
-                    <tr><td>Liquidity Management in Settlement Systems</td><td>A</td><td>Intraday liquidity, funding structures, and the alignment of liquidity with transaction execution.</td></tr>
-                    <tr><td>Digital Public Infrastructure: the ID–Pay–Data Stack</td><td>A</td><td>National DPI design, the interdependence of identity, payments, and data exchange, and the governance that holds it together.</td></tr>
-                    <tr><td>Digital Identity Fundamentals</td><td>F</td><td>Identity systems, credentials, and their role as the prerequisite for digital finance.</td></tr>
-                </tbody>
-            </table>
+                <!-- Path II -->
+                <div class="catalog-accordion-item" id="path-2" data-path="2">
+                    <div class="catalog-accordion-header" onclick="toggleAccordion(this)">II. Payments and Digital Money</div>
+                    <div class="catalog-accordion-content">
+                        <div class="course-card-list">
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Digital Payments</h5><p>Payment instruments, rails, participants, and flows across the digital payments ecosystem.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Digital Financial Literacy</h5><p>Practical command of digital money, accounts, payments, and safe usage.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Mobile Money and Digital Wallets</h5><p>Wallet models, stored value, agent networks, and mobile-money ecosystems.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Cards, Acquiring and Merchant Payments</h5><p>Issuing, acquiring, scheme rules, and the servicing of merchants at scale.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Terminal and Merchant Management</h5><p>POS estate management, terminal lifecycle, and merchant onboarding operations.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Cross-Border Payments and Remittances</h5><p>Correspondent banking, remittance corridors, and the economics of cross-border transfer.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Digital Payment Ecosystems and Interoperability</h5><p>Designing interoperable payment ecosystems across banks, PSPs, telcos, and schemes.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Digital Payments and Fraud Prevention</h5><p>Fraud typologies across payment channels and the controls that contain them.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Agency Banking and Agent Network Management</h5><p>Agent distribution, liquidity management, and rural reach.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Payment Economics and Pricing</h5><p>Interchange, MDR, scheme economics, and the unit economics of payment products.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Path IV -->
-            <h4 style="color: var(--brand-primary); margin-top: 30px;">IV. Open Banking, APIs and Interoperability</h4>
-            <table class="portfolio-table">
-                <thead>
-                    <tr>
-                        <th>Programme</th>
-                        <th>Tier</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Foundations of Open Banking</td><td>F</td><td>What open banking is, who participates, and the value it unlocks.</td></tr>
-                    <tr><td>APIs and Open Banking Basics</td><td>F</td><td>APIs explained for business audiences, and how they carry open banking.</td></tr>
-                    <tr><td>Open Banking Regulations and Implementation</td><td>I</td><td>Implementing open banking regulatory frameworks, for policy and technical staff.</td></tr>
-                    <tr><td>API Architecture and Microservices in Finance</td><td>I</td><td>API design, microservices, and the technical architecture behind open financial platforms.</td></tr>
-                    <tr><td>Open Banking and API Integration</td><td>I</td><td>Integration patterns, interoperability, and the practical work of connecting institutions.</td></tr>
-                    <tr><td>Digital Identity, Consent and Data Governance</td><td>I</td><td>Consent architecture, identity binding, and governance of shared financial data.</td></tr>
-                    <tr><td>Open Banking Implementation Kit</td><td>I</td><td>A structured implementation toolkit for institutions and regulators standing up open banking.</td></tr>
-                    <tr><td>Applied Use Cases and Regional Strategies</td><td>I</td><td>Account aggregation, account-to-account payments, and regional open banking strategy.</td></tr>
-                    <tr><td>Open Finance and PSD2 to PSD3</td><td>A</td><td>The European regulatory arc from PSD2 to PSD3 and the Payment Services Regulation, and what it obliges.</td></tr>
-                    <tr><td>Premium API Monetization and Consent Architecture</td><td>A</td><td>Commercial models for API ecosystems, and the consent and authentication design beneath them.</td></tr>
-                    <tr><td>Embedded Finance, Banking-as-a-Service and Platform Models</td><td>A</td><td>License holder, platform, and distributor: partner economics and compliance allocation across the stack.</td></tr>
-                    <tr><td>Sandbox Simulation and Policy Testing</td><td>A</td><td>Designing and running regulatory sandboxes for controlled innovation and policy experimentation.</td></tr>
-                    <tr><td>Sandbox-Based Training Programs</td><td>I</td><td>Experiential learning inside a live sandbox environment for banks, fintechs, and supervisors.</td></tr>
-                </tbody>
-            </table>
+                <!-- Path III -->
+                <div class="catalog-accordion-item" id="path-3" data-path="3">
+                    <div class="catalog-accordion-header" onclick="toggleAccordion(this)">III. Payment Systems Operations and Market Infrastructure</div>
+                    <div class="catalog-accordion-content">
+                        <div class="course-card-list">
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Instant Payment Systems and Interoperability</h5><p>Fast payment rails, scheme design, and the interoperability that makes them reach.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Clearing, Settlement and Reconciliation Operations</h5><p>How transactions clear, settle, reconcile, and how exceptions are identified and resolved.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>IT Aspects of Payments Digitalization</h5><p>Architecture, security, and interoperability of national payment systems, for central bank IT and payments teams.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Legal, Economic and Business Aspects of Payments Digitalization</h5><p>Legal and business frameworks governing national payment systems, for regulatory and economic units.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>National Payment Systems Operations: RTGS and Interbank Funds Transfer</h5><p>Real-time gross settlement, interbank transfer, liquidity positioning, and reconciliation, delivered against a live national system.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Liquidity Management in Settlement Systems</h5><p>Intraday liquidity, funding structures, and the alignment of liquidity with transaction execution.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Digital Public Infrastructure: the ID–Pay–Data Stack</h5><p>National DPI design, the interdependence of identity, payments, and data exchange, and the governance that holds it together.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Digital Identity Fundamentals</h5><p>Identity systems, credentials, and their role as the prerequisite for digital finance.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Path V -->
-            <h4 style="color: var(--brand-primary); margin-top: 30px;">V. FinTech and Emerging Technology</h4>
-            <table class="portfolio-table">
-                <thead>
-                    <tr>
-                        <th>Programme</th>
-                        <th>Tier</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>FinTech Fundamentals</td><td>F</td><td>The fintech landscape: segments, players, business models, and where value accrues.</td></tr>
-                    <tr><td>Financial Technology Applications</td><td>I</td><td>Applied fintech across lending, payments, insurance, and wealth, with working examples.</td></tr>
-                    <tr><td>Emerging Digital Technologies</td><td>I</td><td>The current technology frontier and its bearing on financial institutions.</td></tr>
-                    <tr><td>Emerging Technologies in Banking: AI, Blockchain and IoT</td><td>I</td><td>Frontier technologies assessed for banking application, risk, and readiness.</td></tr>
-                    <tr><td>Emerging Digital Finance Technologies in Banking</td><td>A</td><td>An intensive executive programme across the full emerging-technology agenda facing a bank.</td></tr>
-                    <tr><td>Blockchain and Distributed Ledger Fundamentals</td><td>F</td><td>How distributed ledgers work, and what they change about trust, record-keeping, and settlement.</td></tr>
-                    <tr><td>Introduction to Digital Assets and Cryptocurrencies</td><td>F</td><td>Digital asset categories, market structure, and the vocabulary of the sector.</td></tr>
-                    <tr><td>Blockchain, Digital Assets and Crypto Assets</td><td>I</td><td>Digital asset frameworks, custody, market infrastructure, and institutional entry points.</td></tr>
-                    <tr><td>Certified Blockchain Expert</td><td>A</td><td>In-depth blockchain certification for advanced practitioners.</td></tr>
-                    <tr><td>Decentralized Finance (DeFi) Essentials</td><td>I</td><td>DeFi protocols, liquidity models, and the risks that accompany them.</td></tr>
-                    <tr><td>Tokenization and Digital Asset Custody</td><td>A</td><td>Tokenized deposits, securities, and real-world assets; custody separation, settlement finality, and the compliance architecture around them.</td></tr>
-                    <tr><td>Digital Contracts and Smart Contracts</td><td>A</td><td>Executable contract logic, legal enforceability, formal verification, oracles, and code as a compliance artifact.</td></tr>
-                    <tr><td>Blended Digital Assets and Hybrid Finance</td><td>A</td><td>Regulatory perimeters, consumer protection, and ecosystem monetization across nested hybrid products.</td></tr>
-                    <tr><td>Stablecoins, CBDC and Programmable Money</td><td>A</td><td>Retail and wholesale CBDC design, stablecoin reserve and governance models, and programmable money.</td></tr>
-                    <tr><td>Cloud Computing Essentials</td><td>F</td><td>Cloud service models, deployment options, and what they mean for a financial institution.</td></tr>
-                    <tr><td>Cloud Computing and Financial Infrastructure</td><td>I</td><td>Cloud adoption for regulated workloads: architecture, residency, resilience, and supervisory expectation.</td></tr>
-                    <tr><td>Quantum Computing in Finance</td><td>A</td><td>Quantum computing assessed for its financial-sector applications and its threat to current cryptography.</td></tr>
-                    <tr><td>Post-Quantum Readiness and Crypto-Agility</td><td>A</td><td>Preparing an institution's cryptographic estate for the post-quantum transition.</td></tr>
-                    <tr><td>Islamic FinTech</td><td>I</td><td>Applying fintech within Sharia-compliant structures and products.</td></tr>
-                    <tr><td>FinTech in Green Finance</td><td>I</td><td>Where financial technology accelerates green and sustainable finance.</td></tr>
-                    <tr><td>Digital Innovation Expert</td><td>A</td><td>Building institutional capability in digital product design, innovation process, and commercialization.</td></tr>
-                </tbody>
-            </table>
+                <!-- Path IV -->
+                <div class="catalog-accordion-item" id="path-4" data-path="4">
+                    <div class="catalog-accordion-header" onclick="toggleAccordion(this)">IV. Open Banking, APIs and Interoperability</div>
+                    <div class="catalog-accordion-content">
+                        <div class="course-card-list">
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Foundations of Open Banking</h5><p>What open banking is, who participates, and the value it unlocks.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>APIs and Open Banking Basics</h5><p>APIs explained for business audiences, and how they carry open banking.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Open Banking Regulations and Implementation</h5><p>Implementing open banking regulatory frameworks, for policy and technical staff.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>API Architecture and Microservices in Finance</h5><p>API design, microservices, and the technical architecture behind open financial platforms.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Open Banking and API Integration</h5><p>Integration patterns, interoperability, and the practical work of connecting institutions.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Digital Identity, Consent and Data Governance</h5><p>Consent architecture, identity binding, and governance of shared financial data.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Open Banking Implementation Kit</h5><p>A structured implementation toolkit for institutions and regulators standing up open banking.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Applied Use Cases and Regional Strategies</h5><p>Account aggregation, account-to-account payments, and regional open banking strategy.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Open Finance and PSD2 to PSD3</h5><p>The European regulatory arc from PSD2 to PSD3 and the Payment Services Regulation, and what it obliges.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Premium API Monetization and Consent Architecture</h5><p>Commercial models for API ecosystems, and the consent and authentication design beneath them.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Embedded Finance, Banking-as-a-Service and Platform Models</h5><p>License holder, platform, and distributor: partner economics and compliance allocation across the stack.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Sandbox Simulation and Policy Testing</h5><p>Designing and running regulatory sandboxes for controlled innovation and policy experimentation.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Sandbox-Based Training Programs</h5><p>Experiential learning inside a live sandbox environment for banks, fintechs, and supervisors.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Path VI -->
-            <h4 style="color: var(--brand-primary); margin-top: 30px;">VI. Data, Artificial Intelligence and Analytics</h4>
-            <table class="portfolio-table">
-                <thead>
-                    <tr>
-                        <th>Programme</th>
-                        <th>Tier</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Data and Analytics</td><td>F</td><td>How data becomes insight, and how insight becomes decision.</td></tr>
-                    <tr><td>Data Literacy for Business Professionals</td><td>F</td><td>Reading, questioning, and using data with confidence in a business role.</td></tr>
-                    <tr><td>Data Visualization and Storytelling</td><td>F</td><td>Turning analysis into a narrative that moves an audience to decide.</td></tr>
-                    <tr><td>Digital Marketing and Growth Analytics</td><td>F</td><td>Digital acquisition, funnel analytics, and measurement of growth.</td></tr>
-                    <tr><td>Introduction to Agentic AI in the Workplace</td><td>F</td><td>What agentic AI is, how it differs from generative AI, and where it changes professional work.</td></tr>
-                    <tr><td>AI and Machine Learning for Non-Technical Professionals</td><td>F</td><td>Artificial intelligence explained for business, risk, and compliance audiences.</td></tr>
-                    <tr><td>Data Preparation for Machine Learning</td><td>I</td><td>Building the datasets that machine learning depends on: quality, lineage, and structure.</td></tr>
-                    <tr><td>Machine Learning Fundamentals for Financial Services</td><td>I</td><td>Applying machine learning to risk, scoring, and decision models.</td></tr>
-                    <tr><td>Artificial Intelligence in Finance</td><td>I</td><td>AI across financial operations: where it works, where it fails, and what it costs.</td></tr>
-                    <tr><td>AI for Business: Preparing for AI Integration</td><td>I</td><td>Readying an institution to adopt AI: use cases, data, people, and process.</td></tr>
-                    <tr><td>AI Readiness and Adoption in Banking</td><td>I</td><td>Closing the capability and human-resource gaps that hold back AI adoption in banks.</td></tr>
-                    <tr><td>Digital Lending and Risk Scoring in Retail Banking</td><td>I</td><td>Credit scoring, alternative data, and analytics-driven lending decisions.</td></tr>
-                    <tr><td>Responsible AI and Digital Ethics in Finance</td><td>I</td><td>Fairness, transparency, accountability, and the ethical frame around financial AI.</td></tr>
-                    <tr><td>Agentic AI for Financial Services: Architecture and Governance</td><td>A</td><td>Framed and controlled agentic AI: bounded autonomy, persistent memory, tool use, human-in-the-loop design, and cost discipline.</td></tr>
-                    <tr><td>AI Governance and Model Risk Management</td><td>A</td><td>Model lifecycle governance mapped to the EU AI Act, NIST AI RMF, and ISO/IEC 42001.</td></tr>
-                    <tr><td>Effective Use of AI Against Money Laundering and Terrorism Financing</td><td>A</td><td>Applying AI and machine learning to detect, predict, and disrupt illicit financial flows, integrated with AML/CFT and supervisory frameworks.</td></tr>
-                    <tr><td>Data Governance, Classification and Privacy Impact Assessment</td><td>A</td><td>Classification schemes, stewardship, residency, retention, and DPIA methodology.</td></tr>
-                </tbody>
-            </table>
+                <!-- Path V -->
+                <div class="catalog-accordion-item" id="path-5" data-path="5">
+                    <div class="catalog-accordion-header" onclick="toggleAccordion(this)">V. FinTech and Emerging Technology</div>
+                    <div class="catalog-accordion-content">
+                        <div class="course-card-list">
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>FinTech Fundamentals</h5><p>The fintech landscape: segments, players, business models, and where value accrues.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Financial Technology Applications</h5><p>Applied fintech across lending, payments, insurance, and wealth, with working examples.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Emerging Digital Technologies</h5><p>The current technology frontier and its bearing on financial institutions.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Emerging Technologies in Banking: AI, Blockchain and IoT</h5><p>Frontier technologies assessed for banking application, risk, and readiness.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Emerging Digital Finance Technologies in Banking</h5><p>An intensive executive programme across the full emerging-technology agenda facing a bank.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Blockchain and Distributed Ledger Fundamentals</h5><p>How distributed ledgers work, and what they change about trust, record-keeping, and settlement.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Introduction to Digital Assets and Cryptocurrencies</h5><p>Digital asset categories, market structure, and the vocabulary of the sector.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Blockchain, Digital Assets and Crypto Assets</h5><p>Digital asset frameworks, custody, market infrastructure, and institutional entry points.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Certified Blockchain Expert</h5><p>In-depth blockchain certification for advanced practitioners.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Decentralized Finance (DeFi) Essentials</h5><p>DeFi protocols, liquidity models, and the risks that accompany them.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Tokenization and Digital Asset Custody</h5><p>Tokenized deposits, securities, and real-world assets; custody separation, settlement finality, and the compliance architecture around them.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Digital Contracts and Smart Contracts</h5><p>Executable contract logic, legal enforceability, formal verification, oracles, and code as a compliance artifact.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Blended Digital Assets and Hybrid Finance</h5><p>Regulatory perimeters, consumer protection, and ecosystem monetization across nested hybrid products.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Stablecoins, CBDC and Programmable Money</h5><p>Retail and wholesale CBDC design, stablecoin reserve and governance models, and programmable money.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Cloud Computing Essentials</h5><p>Cloud service models, deployment options, and what they mean for a financial institution.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Cloud Computing and Financial Infrastructure</h5><p>Cloud adoption for regulated workloads: architecture, residency, resilience, and supervisory expectation.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Quantum Computing in Finance</h5><p>Quantum computing assessed for its financial-sector applications and its threat to current cryptography.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Post-Quantum Readiness and Crypto-Agility</h5><p>Preparing an institution's cryptographic estate for the post-quantum transition.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Islamic FinTech</h5><p>Applying fintech within Sharia-compliant structures and products.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>FinTech in Green Finance</h5><p>Where financial technology accelerates green and sustainable finance.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Digital Innovation Expert</h5><p>Building institutional capability in digital product design, innovation process, and commercialization.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Path VII -->
-            <h4 style="color: var(--brand-primary); margin-top: 30px;">VII. Risk, Cybersecurity and Operational Resilience</h4>
-            <table class="portfolio-table">
-                <thead>
-                    <tr>
-                        <th>Programme</th>
-                        <th>Tier</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Cybersecurity Awareness</td><td>F</td><td>The threats that reach every employee, and the habits that stop them.</td></tr>
-                    <tr><td>Fraud Awareness in Digital Channels</td><td>F</td><td>Recognizing social engineering, account takeover, and payment fraud as they present.</td></tr>
-                    <tr><td>Data Privacy and GDPR Essentials</td><td>F</td><td>Personal data, lawful basis, data subject rights, and everyday privacy obligations.</td></tr>
-                    <tr><td>Cybersecurity Essentials for Financial Institutions</td><td>I</td><td>Threat landscape, controls, and governance for institutions holding financial data and value.</td></tr>
-                    <tr><td>Risk Management in the Digital Era</td><td>I</td><td>Operational, technology, and conduct risk in digitally delivered financial services.</td></tr>
-                    <tr><td>IT Governance and Compliance</td><td>I</td><td>Governance structures, control frameworks, and assurance over digital operations.</td></tr>
-                    <tr><td>Third-Party, Vendor and Outsourcing Risk</td><td>I</td><td>Concentration risk, contractual safeguards, exit strategy, and the register that holds it together.</td></tr>
-                    <tr><td>Business Continuity and Resilience Testing</td><td>I</td><td>Continuity planning, scenario testing, and threat-led penetration testing.</td></tr>
-                    <tr><td>Digital Risk Management and Cyber Resilience</td><td>A</td><td>Operational resilience and incident response for risk and compliance divisions.</td></tr>
-                    <tr><td>Securing Digital Operations and Mitigating Cyber Threats in Regulated Entities</td><td>A</td><td>The contemporary threat landscape for regulated entities, including AI-enabled attack, deepfake fraud, conflict-linked threat actors, and crypto-agility.</td></tr>
-                    <tr><td>DORA and Operational Resilience: ICT Risk Governance</td><td>A</td><td>The five pillars of DORA, board-level ICT governance, incident classification, and the continuing-development obligation that follows.</td></tr>
-                </tbody>
-            </table>
+                <!-- Path VI -->
+                <div class="catalog-accordion-item" id="path-6" data-path="6">
+                    <div class="catalog-accordion-header" onclick="toggleAccordion(this)">VI. Data, Artificial Intelligence and Analytics</div>
+                    <div class="catalog-accordion-content">
+                        <div class="course-card-list">
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Data and Analytics</h5><p>How data becomes insight, and how insight becomes decision.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Data Literacy for Business Professionals</h5><p>Reading, questioning, and using data with confidence in a business role.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Data Visualization and Storytelling</h5><p>Turning analysis into a narrative that moves an audience to decide.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Digital Marketing and Growth Analytics</h5><p>Digital acquisition, funnel analytics, and measurement of growth.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Introduction to Agentic AI in the Workplace</h5><p>What agentic AI is, how it differs from generative AI, and where it changes professional work.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>AI and Machine Learning for Non-Technical Professionals</h5><p>Artificial intelligence explained for business, risk, and compliance audiences.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Data Preparation for Machine Learning</h5><p>Building the datasets that machine learning depends on: quality, lineage, and structure.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Machine Learning Fundamentals for Financial Services</h5><p>Applying machine learning to risk, scoring, and decision models.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Artificial Intelligence in Finance</h5><p>AI across financial operations: where it works, where it fails, and what it costs.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>AI for Business: Preparing for AI Integration</h5><p>Readying an institution to adopt AI: use cases, data, people, and process.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>AI Readiness and Adoption in Banking</h5><p>Closing the capability and human-resource gaps that hold back AI adoption in banks.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Digital Lending and Risk Scoring in Retail Banking</h5><p>Credit scoring, alternative data, and analytics-driven lending decisions.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Responsible AI and Digital Ethics in Finance</h5><p>Fairness, transparency, accountability, and the ethical frame around financial AI.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Agentic AI for Financial Services: Architecture and Governance</h5><p>Framed and controlled agentic AI: bounded autonomy, persistent memory, tool use, human-in-the-loop design, and cost discipline.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>AI Governance and Model Risk Management</h5><p>Model lifecycle governance mapped to the EU AI Act, NIST AI RMF, and ISO/IEC 42001.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Effective Use of AI Against Money Laundering and Terrorism Financing</h5><p>Applying AI and machine learning to detect, predict, and disrupt illicit financial flows, integrated with AML/CFT and supervisory frameworks.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Data Governance, Classification and Privacy Impact Assessment</h5><p>Classification schemes, stewardship, residency, retention, and DPIA methodology.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Path VIII -->
-            <h4 style="color: var(--brand-primary); margin-top: 30px;">VIII. Compliance, RegTech and SupTech</h4>
-            <table class="portfolio-table">
-                <thead>
-                    <tr>
-                        <th>Programme</th>
-                        <th>Tier</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Introduction to RegTech</td><td>F</td><td>What regulatory technology does, and where it earns its keep.</td></tr>
-                    <tr><td>Introduction to AML and Financial Crime</td><td>F</td><td>Money laundering, terrorist financing, and the risk-based approach, explained from first principles.</td></tr>
-                    <tr><td>Consumer Protection in Digital Finance</td><td>I</td><td>Fair treatment, disclosure, complaints handling, and redress in digital channels.</td></tr>
-                    <tr><td>E-KYC and Digital Onboarding</td><td>I</td><td>Remote identification, verification, and the onboarding journey under regulatory constraint.</td></tr>
-                    <tr><td>Digital Identity, KYC/AML and Data Protection</td><td>I</td><td>The intersection of identity, financial crime controls, and data protection obligations.</td></tr>
-                    <tr><td>AML/CFT and the FATF Recommendations for Digital Finance</td><td>I</td><td>The FATF standards applied to digital finance, virtual assets, and the Travel Rule.</td></tr>
-                    <tr><td>Financial Crime Prevention and Risk Management</td><td>I</td><td>Detecting and containing financial crime across digital environments.</td></tr>
-                    <tr><td>RegTech Solutions</td><td>I</td><td>Tools and automation for regulatory reporting, monitoring, and case management.</td></tr>
-                    <tr><td>Regulatory Technology and Compliance Automation</td><td>I</td><td>Automating the compliance workflow end to end, from obligation to filing.</td></tr>
-                    <tr><td>Digital Banking Operations and Compliance</td><td>I</td><td>Compliance embedded within digital banking operations, and the efficiency it releases.</td></tr>
-                    <tr><td>Case Study Analysis and Simulations</td><td>I</td><td>Applying regulatory knowledge to realistic institutional scenarios.</td></tr>
-                    <tr><td>RegTech for Small and Medium PSPs</td><td>A</td><td>Turning the cost of compliance into infrastructure advantage: automation, embedded compliance, and the revenue channel inside a compliance stack.</td></tr>
-                    <tr><td>MiCA Compliance Automation: Transaction Monitoring and Reporting for CASPs</td><td>A</td><td>Scenario design, threshold tuning, automated filing, and the human-oversight gates that keep automation trustworthy.</td></tr>
-                    <tr><td>MiCA Complaints Handling for CASPs</td><td>A</td><td>Supervisory expectations under ESMA, EBA, and CySEC, and the complaints architecture they require.</td></tr>
-                    <tr><td>Embedded Consumer Protection in Digital Investment Platforms</td><td>A</td><td>Safeguards by design across digital investment and trading platforms.</td></tr>
-                    <tr><td>SupTech and Infrastructure Monetization</td><td>A</td><td>Compliant APIs as a revenue engine: what BIS proof points establish, and how an institution monetizes supervisory-grade infrastructure.</td></tr>
-                    <tr><td>RegTech and SupTech for Financial Authorities</td><td>A</td><td>Supervisory technology for regulators: data ingestion, analytics, alerting, and examiner workflow.</td></tr>
-                    <tr><td>Strategic Digital Finance for Executives: Standards, Compliance and Innovation</td><td>A</td><td>Strategic leadership across international standards, compliance obligation, and innovation, for boards and senior executives.</td></tr>
-                </tbody>
-            </table>
+                <!-- Path VII -->
+                <div class="catalog-accordion-item" id="path-7" data-path="7">
+                    <div class="catalog-accordion-header" onclick="toggleAccordion(this)">VII. Risk, Cybersecurity and Operational Resilience</div>
+                    <div class="catalog-accordion-content">
+                        <div class="course-card-list">
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Cybersecurity Awareness</h5><p>The threats that reach every employee, and the habits that stop them.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Fraud Awareness in Digital Channels</h5><p>Recognizing social engineering, account takeover, and payment fraud as they present.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Data Privacy and GDPR Essentials</h5><p>Personal data, lawful basis, data subject rights, and everyday privacy obligations.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Cybersecurity Essentials for Financial Institutions</h5><p>Threat landscape, controls, and governance for institutions holding financial data and value.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Risk Management in the Digital Era</h5><p>Operational, technology, and conduct risk in digitally delivered financial services.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>IT Governance and Compliance</h5><p>Governance structures, control frameworks, and assurance over digital operations.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Third-Party, Vendor and Outsourcing Risk</h5><p>Concentration risk, contractual safeguards, exit strategy, and the register that holds it together.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Business Continuity and Resilience Testing</h5><p>Continuity planning, scenario testing, and threat-led penetration testing.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Digital Risk Management and Cyber Resilience</h5><p>Operational resilience and incident response for risk and compliance divisions.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Securing Digital Operations and Mitigating Cyber Threats in Regulated Entities</h5><p>The contemporary threat landscape for regulated entities, including AI-enabled attack, deepfake fraud, conflict-linked threat actors, and crypto-agility.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>DORA and Operational Resilience: ICT Risk Governance</h5><p>The five pillars of DORA, board-level ICT governance, incident classification, and the continuing-development obligation that follows.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Path IX -->
-            <h4 style="color: var(--brand-primary); margin-top: 30px;">IX. Financial Inclusion and Development Finance</h4>
-            <table class="portfolio-table">
-                <thead>
-                    <tr>
-                        <th>Programme</th>
-                        <th>Tier</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Financial Inclusion</td><td>F</td><td>Access, usage, quality, and welfare: what inclusion means and how it is measured.</td></tr>
-                    <tr><td>MSME Digitalization</td><td>F</td><td>Practical digitalization for micro, small, and medium enterprises.</td></tr>
-                    <tr><td>Sustainability and the Green Digital Economy</td><td>F</td><td>Where sustainability and digital transformation reinforce one another.</td></tr>
-                    <tr><td>Youth FinTech Programs</td><td>F</td><td>Introducing young professionals to fintech careers, tools, and innovation.</td></tr>
-                    <tr><td>Digital Financial Inclusion Strategies</td><td>I</td><td>Designing inclusive digital products and the strategies that carry them to scale.</td></tr>
-                    <tr><td>Financial Inclusion and Digital Lending Strategies</td><td>I</td><td>Inclusive lending product design for underserved segments.</td></tr>
-                    <tr><td>Digital Lending, BNPL and MSME Finance</td><td>I</td><td>Digital credit models, buy-now-pay-later, and MSME financing structures.</td></tr>
-                    <tr><td>Digital Lending Approach: Digital Tools</td><td>I</td><td>The tooling of digital origination, monitoring, and collection.</td></tr>
-                    <tr><td>Green Finance and ESG</td><td>I</td><td>Sustainable finance frameworks, green product design, and ESG risk assessment.</td></tr>
-                    <tr><td>Women in FinTech</td><td>I</td><td>Capacity building and advancement for women professionals across the fintech sector.</td></tr>
-                    <tr><td>AgriFinance and Climate-Smart Lending</td><td>A</td><td>Value chain finance, seasonal and asset-based lending, weather and yield data, and climate risk in credit decisioning.</td></tr>
-                    <tr><td>ESG Taxonomies and Sustainable Finance</td><td>A</td><td>Taxonomy alignment, sustainability-linked products, KPI calibration, and disclosure architecture under CSRD, SFDR, and ISSB.</td></tr>
-                </tbody>
-            </table>
+                <!-- Path VIII -->
+                <div class="catalog-accordion-item" id="path-8" data-path="8">
+                    <div class="catalog-accordion-header" onclick="toggleAccordion(this)">VIII. Compliance, RegTech and SupTech</div>
+                    <div class="catalog-accordion-content">
+                        <div class="course-card-list">
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Introduction to RegTech</h5><p>What regulatory technology does, and where it earns its keep.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Introduction to AML and Financial Crime</h5><p>Money laundering, terrorist financing, and the risk-based approach, explained from first principles.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Consumer Protection in Digital Finance</h5><p>Fair treatment, disclosure, complaints handling, and redress in digital channels.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>E-KYC and Digital Onboarding</h5><p>Remote identification, verification, and the onboarding journey under regulatory constraint.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Digital Identity, KYC/AML and Data Protection</h5><p>The intersection of identity, financial crime controls, and data protection obligations.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>AML/CFT and the FATF Recommendations for Digital Finance</h5><p>The FATF standards applied to digital finance, virtual assets, and the Travel Rule.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Financial Crime Prevention and Risk Management</h5><p>Detecting and containing financial crime across digital environments.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>RegTech Solutions</h5><p>Tools and automation for regulatory reporting, monitoring, and case management.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Regulatory Technology and Compliance Automation</h5><p>Automating the compliance workflow end to end, from obligation to filing.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Digital Banking Operations and Compliance</h5><p>Compliance embedded within digital banking operations, and the efficiency it releases.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Case Study Analysis and Simulations</h5><p>Applying regulatory knowledge to realistic institutional scenarios.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>RegTech for Small and Medium PSPs</h5><p>Turning the cost of compliance into infrastructure advantage: automation, embedded compliance, and the revenue channel inside a compliance stack.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>MiCA Compliance Automation: Transaction Monitoring and Reporting for CASPs</h5><p>Scenario design, threshold tuning, automated filing, and the human-oversight gates that keep automation trustworthy.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>MiCA Complaints Handling for CASPs</h5><p>Supervisory expectations under ESMA, EBA, and CySEC, and the complaints architecture they require.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Embedded Consumer Protection in Digital Investment Platforms</h5><p>Safeguards by design across digital investment and trading platforms.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>SupTech and Infrastructure Monetization</h5><p>Compliant APIs as a revenue engine: what BIS proof points establish, and how an institution monetizes supervisory-grade infrastructure.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>RegTech and SupTech for Financial Authorities</h5><p>Supervisory technology for regulators: data ingestion, analytics, alerting, and examiner workflow.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>Strategic Digital Finance for Executives: Standards, Compliance and Innovation</h5><p>Strategic leadership across international standards, compliance obligation, and innovation, for boards and senior executives.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Path X -->
-            <h4 style="color: var(--brand-primary); margin-top: 30px;">X. Innovation, Entrepreneurship and Professional Skills</h4>
-            <table class="portfolio-table">
-                <thead>
-                    <tr>
-                        <th>Programme</th>
-                        <th>Tier</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Innovation</td><td>F</td><td>How institutions generate, test, and commercialize new ideas.</td></tr>
-                    <tr><td>Entrepreneurship</td><td>F</td><td>Building a venture: opportunity, model, execution, and risk.</td></tr>
-                    <tr><td>Design Thinking and Problem Solving</td><td>F</td><td>A structured method for framing problems and designing solutions around users.</td></tr>
-                    <tr><td>Startup Fundamentals and Business Model Design</td><td>F</td><td>From idea to business model, with the discipline to test assumptions early.</td></tr>
-                    <tr><td>Pitching and Fundraising Basics</td><td>F</td><td>Constructing and delivering an investment case.</td></tr>
-                    <tr><td>Project Management for Digital Initiatives</td><td>F</td><td>Planning, sequencing, and delivering digital projects to time and budget.</td></tr>
-                    <tr><td>Agile Ways of Working</td><td>F</td><td>Agile practice for teams delivering digital products.</td></tr>
-                    <tr><td>Digital Collaboration and Remote Work</td><td>F</td><td>Tools and habits for effective distributed working.</td></tr>
-                    <tr><td>Digital Skills for Employability</td><td>F</td><td>The digital competencies employers look for, taught for immediate application.</td></tr>
-                </tbody>
-            </table>
+                <!-- Path IX -->
+                <div class="catalog-accordion-item" id="path-9" data-path="9">
+                    <div class="catalog-accordion-header" onclick="toggleAccordion(this)">IX. Financial Inclusion and Development Finance</div>
+                    <div class="catalog-accordion-content">
+                        <div class="course-card-list">
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Financial Inclusion</h5><p>Access, usage, quality, and welfare: what inclusion means and how it is measured.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>MSME Digitalization</h5><p>Practical digitalization for micro, small, and medium enterprises.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Sustainability and the Green Digital Economy</h5><p>Where sustainability and digital transformation reinforce one another.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Youth FinTech Programs</h5><p>Introducing young professionals to fintech careers, tools, and innovation.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Digital Financial Inclusion Strategies</h5><p>Designing inclusive digital products and the strategies that carry them to scale.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Financial Inclusion and Digital Lending Strategies</h5><p>Inclusive lending product design for underserved segments.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Digital Lending, BNPL and MSME Finance</h5><p>Digital credit models, buy-now-pay-later, and MSME financing structures.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Digital Lending Approach: Digital Tools</h5><p>The tooling of digital origination, monitoring, and collection.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Green Finance and ESG</h5><p>Sustainable finance frameworks, green product design, and ESG risk assessment.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="I"><div class="course-info"><h5>Women in FinTech</h5><p>Capacity building and advancement for women professionals across the fintech sector.</p></div><span class="tier-badge">Tier 2 - I</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>AgriFinance and Climate-Smart Lending</h5><p>Value chain finance, seasonal and asset-based lending, weather and yield data, and climate risk in credit decisioning.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                            <div class="course-item-card" data-tier="A"><div class="course-info"><h5>ESG Taxonomies and Sustainable Finance</h5><p>Taxonomy alignment, sustainability-linked products, KPI calibration, and disclosure architecture under CSRD, SFDR, and ISSB.</p></div><span class="tier-badge">Tier 3 - A</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Path X -->
+                <div class="catalog-accordion-item" id="path-10" data-path="10">
+                    <div class="catalog-accordion-header" onclick="toggleAccordion(this)">X. Innovation, Entrepreneurship and Professional Skills</div>
+                    <div class="catalog-accordion-content">
+                        <div class="course-card-list">
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Innovation</h5><p>How institutions generate, test, and commercialize new ideas.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Entrepreneurship</h5><p>Building a venture: opportunity, model, execution, and risk.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Design Thinking and Problem Solving</h5><p>A structured method for framing problems and designing solutions around users.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Startup Fundamentals and Business Model Design</h5><p>From idea to business model, with the discipline to test assumptions early.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Pitching and Fundraising Basics</h5><p>Constructing and delivering an investment case.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Project Management for Digital Initiatives</h5><p>Planning, sequencing, and delivering digital projects to time and budget.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Agile Ways of Working</h5><p>Agile practice for teams delivering digital products.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Digital Collaboration and Remote Work</h5><p>Tools and habits for effective distributed working.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                            <div class="course-item-card" data-tier="F"><div class="course-info"><h5>Digital Skills for Employability</h5><p>The digital competencies employers look for, taught for immediate application.</p></div><span class="tier-badge">Tier 1 - F</span></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </section>
-    </main>
 
-    <section class="portfolio-section">
+        <!-- Commissioning a Programme Section -->
+        <section class="portfolio-section">
             <h3 style="color: var(--brand-accent);">Commissioning a Programme</h3>
             <p>Programmes are delivered as single sessions, structured tracks, or full curricula, and are tailored to the institution, the audience, and the depth of transfer required. Tier 2 and Tier 3 engagements open with a Knowledge or Staff Assessment Test, which calibrates content to the capability already present in the room.</p>
             <p>For more information on a particular training, kindly request the course outline at least 7 days before the intended date.</p>
@@ -779,6 +912,7 @@
                 <a href="contact.html" class="contact-cta">Discuss a Programme</a>
             </div>
         </section>
+    </main>
 
     <section class="contact-section">
         <div class="contact-content">
@@ -820,6 +954,66 @@
             .then(data => {
                 document.getElementById('footer-placeholder').innerHTML = data;
             });
+
+        // Interactive Accordion Toggle
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            item.classList.toggle('open');
+        }
+
+        // Jump to path from overview grid cards and open it (accounts for topbar fixed height offset)
+        function openCatalogPath(pathId) {
+            const pathElem = document.getElementById(pathId);
+            if (pathElem) {
+                pathElem.classList.add('open');
+                
+                // Calculate precise offset accounting for the fixed topbar header height
+                const topbar = document.querySelector('.topcontainer');
+                const headerHeight = topbar ? topbar.offsetHeight : 100;
+                const elementPosition = pathElem.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Filter Catalog by Tier
+        function filterCatalog(tier, btn) {
+            // Update active state on buttons
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const accordionItems = document.querySelectorAll('.catalog-accordion-item');
+
+            accordionItems.forEach(item => {
+                const courses = item.querySelectorAll('.course-item-card');
+                let matchCount = 0;
+
+                courses.forEach(course => {
+                    if (tier === 'all' || course.getAttribute('data-tier') === tier) {
+                        course.style.display = 'flex';
+                        matchCount++;
+                    } else {
+                        course.style.display = 'none';
+                    }
+                });
+
+                // Open category accordion if it contains matching items, hide if none
+                if (matchCount > 0) {
+                    item.style.display = 'block';
+                    if (tier !== 'all') {
+                        item.classList.add('open');
+                    } else {
+                        item.classList.remove('open');
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
 
         // Your existing toggle and helper functions
         function toggleMenu() {
