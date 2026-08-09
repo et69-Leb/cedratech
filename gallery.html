@@ -310,14 +310,42 @@
             originalItems.map(item => item.outerHTML)
         );
 
+        // Initial padding to allow smooth scrolling both ways
+        prependMoreImages(row);
         addMoreImages(row);
+
+        // Center scroll position initially so user can swipe left or right instantly
+        row.scrollLeft = row.scrollWidth / 3;
+
+        // Listen to manual scrolling (touch swiping on mobile, or trackpad/mouse wheel)
+        row.addEventListener('scroll', () => {
+            const distanceFromEnd = row.scrollWidth - (row.scrollLeft + row.clientWidth);
+
+            // If user scrolls near the right edge, append more content
+            if (distanceFromEnd < row.clientWidth) {
+                addMoreImages(row);
+            }
+
+            // If user scrolls near the left edge, prepend more content and shift scroll position safely
+            if (row.scrollLeft < row.clientWidth) {
+                const oldScrollWidth = row.scrollWidth;
+                prependMoreImages(row);
+                row.scrollLeft += (row.scrollWidth - oldScrollWidth);
+            }
+        });
     }
 
     function addMoreImages(row) {
         const originalItems = JSON.parse(row.dataset.originalItems);
-
         originalItems.forEach(html => {
             row.insertAdjacentHTML('beforeend', html);
+        });
+    }
+
+    function prependMoreImages(row) {
+        const originalItems = JSON.parse(row.dataset.originalItems);
+        originalItems.slice().reverse().forEach(html => {
+            row.insertAdjacentHTML('afterbegin', html);
         });
     }
 
@@ -334,29 +362,6 @@
             left: scrollAmount * direction,
             behavior: 'smooth'
         });
-
-        if (direction > 0) {
-            setTimeout(() => {
-                const distanceFromEnd =
-                    row.scrollWidth - (row.scrollLeft + row.clientWidth);
-
-                if (distanceFromEnd < row.clientWidth * 2) {
-                    addMoreImages(row);
-                }
-            }, 400);
-        }
-
-        if (direction < 0) {
-            if (row.scrollLeft <= row.clientWidth * 2) {
-                const originalItems = JSON.parse(row.dataset.originalItems);
-
-                originalItems.slice().reverse().forEach(html => {
-                    row.insertAdjacentHTML('afterbegin', html);
-                });
-
-                row.scrollLeft += row.scrollWidth / 3;
-            }
-        }
     }
 
     function initializeGalleries() {
