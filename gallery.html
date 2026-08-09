@@ -8,6 +8,37 @@
     <link rel="stylesheet" href="styles.css">
 
     <style>
+        /* Prevent horizontal overflow and ensure proper box sizing globally */
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .gallery-container {
+            width: 100%;
+            max-width: 100%;
+            padding: 0 15px;
+            margin: 0 auto;
+        }
+
+        .gallery-category {
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .gallery-row-wrapper {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
         .gallery-scroll-row {
             display: flex;
             overflow-x: auto;
@@ -17,7 +48,8 @@
             -ms-overflow-style: none;
             -webkit-overflow-scrolling: touch;
             padding-bottom: 10px;
-            gap: 15px; /* Adds consistent spacing between items */
+            gap: 15px;
+            width: 100%;
         }
 
         .gallery-scroll-row::-webkit-scrollbar {
@@ -27,7 +59,7 @@
         .gallery-scroll-row .gallery-item {
             flex: 0 0 auto;
             scroll-snap-align: start;
-            height: 220px; /* Fixed height container for uniform layout */
+            height: 220px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -37,7 +69,7 @@
             max-width: 100%;
             height: 100%;
             width: auto;
-            object-fit: contain; /* Ensures entire image is visible without distortion */
+            object-fit: contain;
             border-radius: 8px;
             display: block;
         }
@@ -47,10 +79,10 @@
                 display: none !important;
             }
             .gallery-row-wrapper {
-                padding: 0 10px;
+                padding: 0;
             }
             .gallery-scroll-row .gallery-item {
-                height: 160px; /* Smaller uniform container height for mobile */
+                height: 160px;
             }
         }
     </style>
