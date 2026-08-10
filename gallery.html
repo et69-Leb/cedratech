@@ -20,6 +20,11 @@
             padding: 0;
         }
 
+        /* Fix for fixed header overlapping the hero section */
+        .page-hero {
+            padding-top: 120px; /* Adjust this value if your header is taller or shorter */
+        }
+
         .gallery-container {
             width: 100%;
             max-width: 100%;
@@ -83,6 +88,9 @@
             }
             .gallery-scroll-row .gallery-item {
                 height: 160px;
+            }
+            .page-hero {
+                padding-top: 90px; /* Smaller padding for mobile headers if needed */
             }
         }
     </style>

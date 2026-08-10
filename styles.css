@@ -3,7 +3,7 @@
     --brand-secondary: #334155;
     --brand-tertiary: #E2E8F0;
     --brand-accent: #C5A059;
-    --bg-body: #FFFFFF;
+    --bg-body: #F8FAFC;
     --bg-surface: #F8FAFC;
     --bg-header: var(--brand-primary);
     --bg-footer: #0F172A;
@@ -15,8 +15,6 @@
     --nav-hover-border: var(--brand-accent);
     --dropdown-hover-border: var(--brand-accent);
     --divider-line: rgba(255, 255, 255, 0.15); 
-    --scrollbar-thumb: #94A3B8;
-    --scrollbar-thumb-hover: #475569;
     --mobile-menu-bg: var(--brand-primary);
     --mobile-menu-hover-bg: rgba(255, 255, 255, 0.1);
     --mobile-dropdown-bg: rgba(0, 0, 0, 0.15);
@@ -30,15 +28,26 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    overflow-y: overlay;
+    overflow-y: auto;
     background-color: var(--bg-body);
     color: var(--text-dark);
 }
 
-::-webkit-scrollbar { width: 8px; position: fixed; z-index: 9999; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; }
-::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); background-clip: padding-box; }
+/* Fixed scrollbar styling for Opera and WebKit browsers to eliminate the white gutter bar */
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: #F8FAFC;
+}
+::-webkit-scrollbar-track {
+    background-color: #F8FAFC !important;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #CBD5E1 !important;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #94A3B8 !important;
+}
 
 .topcontainer {
     background-color: var(--bg-header);
@@ -339,7 +348,7 @@ main h1 { text-align: center; color: var(--text-accent); }
     margin-bottom: 40px;
 }
 .tier-card {
-    background: white;
+    background: #FFFFFF;
     border: 1px solid var(--brand-tertiary);
     border-top: 4px solid var(--brand-accent);
     border-radius: 8px;
@@ -432,7 +441,7 @@ main h1 { text-align: center; color: var(--text-accent); }
 }
 
 .catalog-accordion-item {
-    background: white;
+    background: #FFFFFF;
     border: 1px solid var(--brand-tertiary);
     border-radius: 8px;
     margin-bottom: 15px;
@@ -629,7 +638,7 @@ main h1 { text-align: center; color: var(--text-accent); }
 }
 
 .practice-card {
-    background: white;
+    background: #FFFFFF;
     padding: 30px;
     border-radius: 4px;
     text-decoration: none;
@@ -751,7 +760,7 @@ main h1 { text-align: center; color: var(--text-accent); }
 .feature-box, .interactive-card {
     padding: 30px;
     border-radius: 4px;
-    background: white;
+    background: #FFFFFF;
     border: 1px solid var(--brand-tertiary);
     transition: all 0.3s ease;
 }
@@ -800,7 +809,6 @@ main h1 { text-align: center; color: var(--text-accent); }
     font-size: 20px;
     transition: opacity 0.4s, background-color 0.3s;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-    display: flex;
     align-items: center;
     justify-content: center;
 }
